@@ -1,6 +1,6 @@
 {
   "name": "updatesentinel",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Open-source update risk checker for self-hosted Docker Compose stacks",
   "license": "AGPL-3.0-only",
   "type": "commonjs",

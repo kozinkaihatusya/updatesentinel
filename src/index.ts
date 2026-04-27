@@ -1,4 +1,5 @@
 import { parseComposeContent, parseComposeFile } from "./parser";
+import { renderJsonReport } from "./report/json";
 import { renderMarkdownReport } from "./report/markdown";
 import type { ComposeFile, HintSummary, Rule, ScanResult } from "./types";
 import { checkAutoUpdateServices, detectAutomationServices } from "./rules/autoUpdateServices";
@@ -46,5 +47,5 @@ export function scanCompose(compose: ComposeFile): ScanResult {
   };
 }
 
-export { parseComposeContent, parseComposeFile, renderMarkdownReport };
+export { parseComposeContent, parseComposeFile, renderJsonReport, renderMarkdownReport };
 export type { AutomationDetection, ComposeFile, ComposeService, Finding, HintSummary, ImageReference, ScanResult, Severity } from "./types";
