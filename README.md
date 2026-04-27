@@ -2,11 +2,11 @@
 
 Open-source update risk checker for self-hosted Docker Compose stacks.
 
-UpdateSentinel scans a `docker-compose.yml` file and prints a local Markdown report about update-related risks: unpinned images, `latest` tags, risky floating tags, auto-update services, stateful services, and missing backup, rollback, or update-process hints.
+UpdateSentinel scans a `docker-compose.yml` file and prints a local Markdown or JSON report about update-related risks: unpinned images, `latest` tags, risky floating tags, auto-update services, stateful services, and missing backup, rollback, or update-process hints.
 
 It is built for self-hosters, homelab users, small teams, and developers running services on VPSes, NAS devices, home servers, Tailscale, WireGuard, reverse proxies, or public cloud servers.
 
-UpdateSentinel does not update containers. It does not pull images. It does not query registries in the MVP. It does not send your Compose file or report anywhere.
+UpdateSentinel is a lightweight Compose-based update risk review tool. It runs locally. It does not guarantee safe updates, update containers, pull images, query registries in the MVP, or send your Compose file or report anywhere.
 
 ## Why This Exists
 
@@ -66,12 +66,83 @@ When running from a clone without installing the package globally:
 node dist/cli.js scan ./docker-compose.yml --format markdown
 ```
 
+JSON output is available for CI and tooling:
+
+```bash
+node dist/cli.js scan ./docker-compose.yml --format json
+```
+
 ## Run With Docker
 
 ```bash
 docker build -t updatesentinel .
 docker run --rm -v "$(pwd):/scan" updatesentinel scan /scan/docker-compose.yml --format markdown
+docker run --rm -v "$(pwd):/scan" updatesentinel scan /scan/docker-compose.yml --format json
 ```
+
+## JSON Output
+
+Use JSON when another tool needs to parse the report:
+
+```bash
+updatesentinel scan ./docker-compose.yml --format json
+```
+
+The JSON report includes the tool name and version, scanned file path, generated timestamp, summary counts, image risk entries, stateful service detections, auto-update detections, backup and rollback hints, and findings with rule IDs, severities, evidence, and recommendations.
+
+## CI Fail Thresholds
+
+Use `--fail-on` to make UpdateSentinel return a non-zero exit code when findings meet a selected severity threshold:
+
+```bash
+updatesentinel scan ./docker-compose.yml --fail-on high
+updatesentinel scan ./docker-compose.yml --format json --fail-on medium
+```
+
+Supported values:
+
+- `none`: always exit `0`
+- `high`: exit `1` if any high finding exists
+- `medium`: exit `1` if any medium or high finding exists
+- `low`: exit `1` if any low, medium, or high finding exists
+
+The default is `none` for backward compatibility.
+
+## Exit Codes
+
+- `0`: scan completed and the selected threshold was not violated
+- `1`: scan completed and the selected `--fail-on` threshold was violated
+- `2`: invalid CLI usage, unsupported option value, file read error, or Compose parsing error
+
+## CI Usage
+
+UpdateSentinel can run in CI without contacting registries or Docker. It only reads Compose configuration.
+
+See [docs/ci-usage.md](docs/ci-usage.md) and [docs/github-actions-example.yml](docs/github-actions-example.yml).
+
+Minimal GitHub Actions example:
+
+```yaml
+name: UpdateSentinel
+
+on:
+  pull_request:
+
+jobs:
+  update-risk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node dist/cli.js scan examples/risky-compose.yml --format json --fail-on high
+```
+
+`examples/risky-compose.yml` intentionally contains high-risk findings, so that strict example fails. Replace it with your Compose file before using it as a blocking CI gate.
 
 ## Example Report
 
@@ -129,9 +200,7 @@ See [examples/report.md](examples/report.md) for a generated report.
 
 ## Roadmap
 
-- JSON report output
 - HTML report output
-- GitHub Actions integration
 - Docker Hub and GHCR tag lookup
 - Renovate config support
 - Dependabot config support
