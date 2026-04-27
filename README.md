@@ -227,9 +227,28 @@ Use GitHub Issues for bugs, false positives, rule ideas, and documentation impro
 
 Please avoid posting private Compose files, credentials, internal hostnames, or sensitive infrastructure details in public issues.
 
-## Hosted Version / Support Note
+## Hosted dashboard / paid support
 
-Hosted dashboards, scheduled update-risk checks, alerts, and setup reviews may come later. If you are interested, open an issue or contact the maintainer.
+UpdateSentinel is free and open source.
+
+A hosted SelfHostGuard dashboard may come later for teams that want:
+
+- scheduled update-risk checks
+- scan history
+- image tag risk diffs over time
+- alerts when risky tags appear
+- GitHub Actions integration
+- Slack / Discord alerts
+- multi-stack monitoring
+- team reports
+
+If you want early access, open an [Early Access Request](https://github.com/kozinkaihatusya/updatesentinel/issues/new?template=early_access_request.md) issue.
+
+If you need help reviewing your self-hosted update, Watchtower, backup-before-update, or rollback setup, open a [Setup Review Request](https://github.com/kozinkaihatusya/updatesentinel/issues/new?template=setup_review_request.md).
+
+The hosted dashboard does not exist yet, support availability is not guaranteed, and UpdateSentinel does not guarantee safe updates. Real backups, changelog review, and restore testing are still required.
+
+See [docs/paid-support.md](docs/paid-support.md) for more context.
 
 ## License
 

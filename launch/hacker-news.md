@@ -18,4 +18,6 @@ It runs locally, prints Markdown, and is read-only. The MVP does not update cont
 
 This is intentionally heuristic and Compose-based, not a guarantee that an update is safe. The goal is to catch common risky patterns before changing a homelab or small-team stack.
 
+I am also collecting interest in a possible future hosted dashboard, but the CLI is the main project and is free/open source.
+
 Feedback, false positives, and rule ideas are very welcome.
