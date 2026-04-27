@@ -126,6 +126,12 @@ It runs locally and prints Markdown. The MVP is read-only: it does not update co
 
 It is not a guarantee that an update is safe. It is a lightweight checklist for common Compose risks before you change a stack.
 
+## What might come next
+
+I am also collecting interest in a possible SelfHostGuard hosted dashboard for scheduled update-risk checks, scan history, image tag risk diffs, and alerts when risky tags appear.
+
+That does not exist yet, and the CLI remains free, open source, local, and read-only.
+
 ## GitHub link placeholder
 
 GitHub: https://github.com/kozinkaihatusya/updatesentinel

@@ -25,4 +25,6 @@ docker run --rm -v "$(pwd):/scan" updatesentinel scan /scan/docker-compose.yml -
 
 It does not update containers, pull images, query registries, or send Compose files anywhere. The MVP is just a read-only heuristic review tool, so it does not replace changelog review, tested backups, or restore tests.
 
+I am also collecting interest for a hosted SelfHostGuard dashboard and update setup reviews, but the CLI itself is free and open source.
+
 I would appreciate feedback from people running real self-hosted stacks. False positives and missing rules are especially useful. If it seems useful, a GitHub star would also help the project get initial visibility, but feedback matters more right now.
