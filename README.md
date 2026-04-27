@@ -1,0 +1,167 @@
+# UpdateSentinel
+
+Open-source update risk checker for self-hosted Docker Compose stacks.
+
+UpdateSentinel scans a `docker-compose.yml` file and prints a local Markdown report about update-related risks: unpinned images, `latest` tags, risky floating tags, auto-update services, stateful services, and missing backup, rollback, or update-process hints.
+
+It is built for self-hosters, homelab users, small teams, and developers running services on VPSes, NAS devices, home servers, Tailscale, WireGuard, reverse proxies, or public cloud servers.
+
+UpdateSentinel does not update containers. It does not pull images. It does not query registries in the MVP. It does not send your Compose file or report anywhere.
+
+## Why This Exists
+
+Self-hosted Docker Compose stacks often start simple:
+
+```yaml
+services:
+  db:
+    image: postgres:latest
+```
+
+That works until an update changes something important. For stateless services, that may be a quick rollback. For databases and apps with persistent state, a surprise update can mean downtime, migrations, backup restores, or data loss.
+
+UpdateSentinel is a lightweight configuration review tool. It does not guarantee safe updates and it does not replace release-note review, tested backups, restore drills, or gradual rollouts. It gives you a quick local checklist before you change a stack.
+
+## What It Checks
+
+- images with no explicit tag, such as `nginx`
+- `latest` tags, such as `postgres:latest`
+- floating tags, such as `stable`, `edge`, `nightly`, `main`, `master`, `rolling`, `beta`, and `alpha`
+- semver-pinned images, such as `postgres:16.2`
+- digest-pinned images, such as `image@sha256:...`
+- Watchtower and Ouroboros-style auto-update services
+- DIUN-style update monitoring services
+- Watchtower labels and `WATCHTOWER_*` environment variables
+- stateful/database-like services, including Postgres, MySQL, MariaDB, MongoDB, Redis, Elasticsearch, OpenSearch, Nextcloud, Gitea, Immich, Jellyfin, Home Assistant, and Paperless
+- backup hints such as `restic`, `borg`, `kopia`, `pgbackrest`, `rclone`, `snapshot`, and `dump`
+- update strategy hints such as `renovate`, `dependabot`, `release`, and `changelog`
+- rollback hints such as `rollback`, `restore`, `previous`, `pinned`, and `downgrade`
+
+## Who It Is For
+
+- self-hosters reviewing a Compose stack before upgrades
+- homelab users running services on a NAS or home server
+- small teams running internal tools with Docker Compose
+- developers running apps on VPSes, reverse proxies, WireGuard, Tailscale, or public cloud servers
+
+## Quick Start
+
+```bash
+git clone https://github.com/kozinkaihatusya/updatesentinel.git
+cd updatesentinel
+npm install
+npm run build
+node dist/cli.js scan examples/risky-compose.yml --format markdown
+```
+
+The CLI command is:
+
+```bash
+updatesentinel scan ./docker-compose.yml --format markdown
+```
+
+When running from a clone without installing the package globally:
+
+```bash
+node dist/cli.js scan ./docker-compose.yml --format markdown
+```
+
+## Run With Docker
+
+```bash
+docker build -t updatesentinel .
+docker run --rm -v "$(pwd):/scan" updatesentinel scan /scan/docker-compose.yml --format markdown
+```
+
+## Example Report
+
+Reports are Markdown and can be copied into issues, pull requests, runbooks, or internal docs after removing sensitive paths or infrastructure details.
+
+```markdown
+# UpdateSentinel Report
+
+Scanned file: `examples/risky-compose.yml`
+
+Total services: 6
+Total images: 6
+Total findings: 17
+
+## HIGH Risk
+
+### Stateful service uses the latest tag
+
+Service: `db`
+Rule: `STATEFUL_SERVICE_LATEST_TAG`
+Severity: `high`
+
+Description:
+Service `db` appears stateful and uses `postgres:latest`.
+
+Evidence:
+`postgres:latest`
+
+Recommendation:
+Pin the service to a specific version. Review release notes, take a backup, and verify restore steps before upgrading.
+```
+
+See [examples/report.md](examples/report.md) for a generated report.
+
+## Update Readiness Checklist
+
+- Pin image versions.
+- Avoid `latest` for stateful services.
+- Review changelogs before updating.
+- Take backups before updating stateful services.
+- Run restore tests.
+- Roll out updates gradually.
+- Document rollback steps.
+- Avoid blind auto-updates for databases.
+
+## Current Limitations
+
+- No registry lookup in the MVP.
+- No CVE scanning in the MVP.
+- No Kubernetes support in the MVP.
+- No hosted dashboard in the MVP.
+- No actual update execution.
+- Findings are heuristic checks based on Docker Compose configuration.
+- It does not replace careful release-note review, backups, restore tests, or staged rollouts.
+
+## Roadmap
+
+- JSON report output
+- HTML report output
+- GitHub Actions integration
+- Docker Hub and GHCR tag lookup
+- Renovate config support
+- Dependabot config support
+- Watchtower config improvements
+- changelog link hints
+- CVE integration
+- hosted dashboard
+
+## Contributing
+
+Contributions are welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Good first areas:
+
+- add more stateful service keywords
+- improve Watchtower detection
+- add JSON output
+- document more real-world Compose patterns
+- add rule documentation
+
+## Community
+
+Use GitHub Issues for bugs, false positives, rule ideas, and documentation improvements.
+
+Please avoid posting private Compose files, credentials, internal hostnames, or sensitive infrastructure details in public issues.
+
+## Hosted Version / Support Note
+
+Hosted dashboards, scheduled update-risk checks, alerts, and setup reviews may come later. If you are interested, open an issue or contact the maintainer.
+
+## License
+
+AGPL-3.0-only. See [LICENSE](LICENSE).

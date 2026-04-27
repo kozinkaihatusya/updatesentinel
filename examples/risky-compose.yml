@@ -1,0 +1,43 @@
+services:
+  app:
+    image: ghcr.io/example/app:stable
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: "change-me"
+
+  cache:
+    image: redis
+    volumes:
+      - redis-data:/data
+
+  media:
+    image: jellyfin/jellyfin:nightly
+    volumes:
+      - media-config:/config
+      - media-cache:/cache
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_POLL_INTERVAL: "3600"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  diun:
+    image: crazymax/diun:latest
+    command: serve
+
+volumes:
+  db-data:
+  redis-data:
+  media-config:
+  media-cache:

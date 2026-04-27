@@ -1,0 +1,30 @@
+# Update strategy: review release notes and changelogs before planned upgrades.
+# Rollback strategy: restore snapshots, pin the previous image tag, and downgrade if needed.
+services:
+  app:
+    image: ghcr.io/example/app:1.4.2
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16.2
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: "use-a-secret-manager"
+
+  backup:
+    image: restic/restic:0.16.4
+    environment:
+      RESTIC_REPOSITORY: "/backup"
+    volumes:
+      - db-data:/data/db:ro
+      - backup-data:/backup
+
+  update-monitor:
+    image: crazymax/diun:4.26.0
+    command: serve
+
+volumes:
+  db-data:
+  backup-data:

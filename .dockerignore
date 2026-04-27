@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+dist
+coverage
+.env
+.env.*
+npm-debug.log*
+Dockerfile
+launch
+docs
+tests
+examples/report.md
+.DS_Store
