@@ -13,6 +13,6 @@ The MVP is intentionally local and read-only. It does not update containers, pul
 
 It is not a replacement for release-note review, tested backups, or restore drills. The goal is to give self-hosters, homelab users, and small teams a quick configuration-based checklist before changing a stack.
 
-GitHub: https://github.com/kozinkaihatusya/updatesentinel
+GitHub: https://github.com/kaibuild/updatesentinel
 
 Feedback, false positives, and rule ideas are welcome.

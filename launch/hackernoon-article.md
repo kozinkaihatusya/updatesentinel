@@ -76,4 +76,4 @@ The MVP runs locally and is read-only. It does not update containers, pull image
 
 It is a heuristic review tool, not a safety guarantee. The goal is to catch common risky patterns before a self-hosted update becomes a recovery task.
 
-GitHub: https://github.com/kozinkaihatusya/updatesentinel
+GitHub: https://github.com/kaibuild/updatesentinel

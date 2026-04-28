@@ -25,15 +25,15 @@
     "updates",
     "cli"
   ],
-  "author": "kozinkaihatusya",
+  "author": "kaibuild",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kozinkaihatusya/updatesentinel.git"
+    "url": "git+https://github.com/kaibuild/updatesentinel.git"
   },
   "bugs": {
-    "url": "https://github.com/kozinkaihatusya/updatesentinel/issues"
+    "url": "https://github.com/kaibuild/updatesentinel/issues"
   },
-  "homepage": "https://github.com/kozinkaihatusya/updatesentinel#readme",
+  "homepage": "https://github.com/kaibuild/updatesentinel#readme",
   "engines": {
     "node": ">=20"
   },

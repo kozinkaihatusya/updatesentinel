@@ -47,7 +47,7 @@ UpdateSentinel is a lightweight configuration review tool. It does not guarantee
 ## Quick Start
 
 ```bash
-git clone https://github.com/kozinkaihatusya/updatesentinel.git
+git clone https://github.com/kaibuild/updatesentinel.git
 cd updatesentinel
 npm install
 npm run build
@@ -242,9 +242,9 @@ A hosted SelfHostGuard dashboard may come later for teams that want:
 - multi-stack monitoring
 - team reports
 
-If you want early access, open an [Early Access Request](https://github.com/kozinkaihatusya/updatesentinel/issues/new?template=early_access_request.md) issue.
+If you want early access, open an [Early Access Request](https://github.com/kaibuild/updatesentinel/issues/new?template=early_access_request.md) issue.
 
-If you need help reviewing your self-hosted update, Watchtower, backup-before-update, or rollback setup, open a [Setup Review Request](https://github.com/kozinkaihatusya/updatesentinel/issues/new?template=setup_review_request.md).
+If you need help reviewing your self-hosted update, Watchtower, backup-before-update, or rollback setup, open a [Setup Review Request](https://github.com/kaibuild/updatesentinel/issues/new?template=setup_review_request.md).
 
 The hosted dashboard does not exist yet, support availability is not guaranteed, and UpdateSentinel does not guarantee safe updates. Real backups, changelog review, and restore testing are still required.
 

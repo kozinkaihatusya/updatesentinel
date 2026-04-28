@@ -81,4 +81,4 @@ It runs locally and prints Markdown. The MVP is read-only: it does not update co
 
 It is not a guarantee of safe updates. It is a small checklist for catching common Compose risks before changing a stack.
 
-GitHub: https://github.com/kozinkaihatusya/updatesentinel
+GitHub: https://github.com/kaibuild/updatesentinel

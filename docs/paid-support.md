@@ -19,7 +19,7 @@ SelfHostGuard may become a hosted dashboard for teams that want:
 - multi-stack monitoring
 - team reports
 
-If this would be useful, open an [Early Access Request](https://github.com/kozinkaihatusya/updatesentinel/issues/new?template=early_access_request.md).
+If this would be useful, open an [Early Access Request](https://github.com/kaibuild/updatesentinel/issues/new?template=early_access_request.md).
 
 ## Possible Paid Setup Review
 
@@ -34,7 +34,7 @@ Possible review areas:
 - stateful service update risk review
 - written report
 
-If this would be useful, open a [Setup Review Request](https://github.com/kozinkaihatusya/updatesentinel/issues/new?template=setup_review_request.md).
+If this would be useful, open a [Setup Review Request](https://github.com/kaibuild/updatesentinel/issues/new?template=setup_review_request.md).
 
 ## Enterprise and Self-hosting Support
 

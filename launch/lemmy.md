@@ -1,6 +1,6 @@
 # I built an open-source update risk checker for Docker Compose stacks
 
-GitHub: https://github.com/kozinkaihatusya/updatesentinel
+GitHub: https://github.com/kaibuild/updatesentinel
 
 I built UpdateSentinel, a small read-only CLI for self-hosters running Docker Compose.
 

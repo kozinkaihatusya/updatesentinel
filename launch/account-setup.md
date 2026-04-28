@@ -2,7 +2,7 @@
 
 Prepare accounts before launch. Send all launch traffic to the GitHub repo:
 
-https://github.com/kozinkaihatusya/updatesentinel
+https://github.com/kaibuild/updatesentinel
 
 ## Hacker News
 

@@ -4,4 +4,4 @@ It scans docker-compose.yml and flags latest tags, unpinned images, floating tag
 
 Runs locally. Read-only MVP.
 
-https://github.com/kozinkaihatusya/updatesentinel
+https://github.com/kaibuild/updatesentinel

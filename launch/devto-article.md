@@ -134,4 +134,4 @@ That does not exist yet, and the CLI remains free, open source, local, and read-
 
 ## GitHub link placeholder
 
-GitHub: https://github.com/kozinkaihatusya/updatesentinel
+GitHub: https://github.com/kaibuild/updatesentinel
